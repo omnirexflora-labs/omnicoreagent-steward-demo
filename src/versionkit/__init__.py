@@ -27,7 +27,7 @@ def parse(text: str) -> Version:
         raise ValueError(f"not a version: {text!r}")
     if len(parts) == 2:
         parts.append("0")
-    return Version(*parts)
+    return Version(*(int(part) for part in parts))
 
 
 def latest(versions: list[str]) -> str:
