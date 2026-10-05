@@ -11,9 +11,9 @@ __all__ = ["Version", "parse", "latest"]
 class Version:
     """A release version: major.minor.patch."""
 
-    major: str
-    minor: str
-    patch: str
+    major: int
+    minor: int
+    patch: int
 
     def __str__(self) -> str:
         return f"{self.major}.{self.minor}.{self.patch}"
@@ -27,7 +27,7 @@ def parse(text: str) -> Version:
         raise ValueError(f"not a version: {text!r}")
     if len(parts) == 2:
         parts.append("0")
-    return Version(*parts)
+    return Version(*(int(part) for part in parts))
 
 
 def latest(versions: list[str]) -> str:
